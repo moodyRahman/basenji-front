@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import ModelEntry from "../components/ModelEntry";
 
 import data from "../params_react.json"
@@ -7,52 +8,63 @@ function Home() {
     
     const [layers, setLayers] = useState([])
     const [selected, setSelected] = useState("")
+    const horizontalScrollElement = useRef();
 
     useEffect(()=> {
-        setSelected('attention')
+        setSelected('conv_block')
     }, [])
 
-    const newLayer = (e) => {
 
+    // we put this into a useEffect so it forces a rerender every new layer
+    useEffect(() => {
+        horizontalScrollElement.current.scrollLeft += 500;
+    }, [layers])
+
+
+
+    const newLayer = (e) => {
         setLayers([...layers, data.find(elem => {
             return elem.function_name === selected
         })]);
-        console.log(layers)
     }
 
+
+
     return (
-        <div>
+        <Container>
 
-            <select name="layer" id="layer" 
-            onChange={(e) => {
-                setSelected(e.target.value); 
-                console.log("selected: ", selected)
-            }}>
+            <Row >
+                <Col>
+                    <select name="layer" id="layer" value={selected}
+                    onChange={(e) => {
+                        setSelected(e.target.value);
+                    }}>
 
-                {data.map((elem, i) => {
-                    return (
-                        <option key={i} value={elem.function_name}>
-                            {elem.function_name}
-                        </option>
-                    )
-                })}
-                
-            </select>
-            <input type="button" onClick={newLayer} value="add layer"/>
-            
-
-            <div>
-                {/* render these elements into their own box, horizontal aligned */}
-                {/* use bootstrap horizontal-flexbox */}
-
-                {layers.map((elem, i) => {
-                        return (
-                            <ModelEntry key={i} name={elem.function_name} params={elem.params} />
+                        {data.map((elem, i) => {
+                            return (
+                                <option key={i} value={elem.function_name}>
+                                    {elem.function_name}
+                                </option>
                             )
                         })}
+                        
+                    </select>
+                    <input type="button" onClick={newLayer} value="add layer"/>
+                </Col>
 
-            </div>
-        </div>
+                <Col>
+                hello
+                </Col>
+            </Row>
+
+
+            <Row ref={horizontalScrollElement} 
+            style={{ justifyContent:"left", overflow: "scroll", flexWrap: "nowrap", alignContent:"left"}}>
+
+                {layers.map((elem, i) => <Col xs={4}><ModelEntry key={i} name={elem.function_name} params={elem.params}/> </Col>)}
+
+            </Row>
+        </Container>
     )
 }
 
