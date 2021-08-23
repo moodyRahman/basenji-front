@@ -32,6 +32,7 @@ function Home() {
 
     return (
         <Container>
+            <div style={{justifyContent:"flex-start", alignContent:"flex-start"}}>
 
             <Row >
                 <Col>
@@ -59,11 +60,13 @@ function Home() {
 
 
             <Row ref={horizontalScrollElement} 
-            style={{ justifyContent:"left", overflow: "scroll", flexWrap: "nowrap", alignContent:"left"}}>
+            style={{ justifyContent:"flex-start", overflow: "scroll", flexWrap: "nowrap", alignContent:"left", width:"80rem", scrollBehavior:"smooth", height:"45rem"}}>
 
                 {layers.map((elem, i) => <Col xs={4}><ModelEntry key={i} name={elem.function_name} params={elem.params}/> </Col>)}
 
             </Row>
+            
+
         </Container>
     )
 }
