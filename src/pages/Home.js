@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Button } from "react-bootstrap";
 import ModelEntry from "../components/ModelEntry";
 
 import data from "../params_react.json"
@@ -62,7 +62,7 @@ function Home() {
             <Row ref={horizontalScrollElement} 
             style={{ justifyContent:"flex-start", overflow: "scroll", flexWrap: "nowrap", alignContent:"left", width:"80rem", scrollBehavior:"smooth", height:"45rem"}}>
 
-                {layers.map((elem, i) => <Col xs={4}><ModelEntry key={i} name={elem.function_name} params={elem.params}/> </Col>)}
+                {layers.map((elem, i) => <Col id={i} xs={4}><ModelEntry key={i} name={elem.function_name} params={elem.params}/> </Col>)}
 
             </Row>
             
@@ -78,7 +78,10 @@ function Home() {
             </Row>
             </div>
         </Container>
-    )
+    ) 
 }
+
+// ADD A QUICK ACCESS BOX TO CLIKC ON AND ACCESS EACH LAYER
+// ADD NUMBERS FOR EACH OF THE LAYERS
 
 export default Home;
