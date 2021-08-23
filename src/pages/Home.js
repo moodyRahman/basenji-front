@@ -17,7 +17,7 @@ function Home() {
 
     // we put this into a useEffect so it forces a rerender every new layer
     useEffect(() => {
-        horizontalScrollElement.current.scrollLeft += 500;
+        horizontalScrollElement.current.scrollLeft += 5000;
     }, [layers])
 
 
