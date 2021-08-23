@@ -67,6 +67,16 @@ function Home() {
             </Row>
             
 
+            <Row>
+                {layers.map((elem, i) =>
+                    <Col style={{width:"10rem"}}>
+                         <Button href={'#' + i}>
+                         {elem.function_name}
+                         </Button>
+                    </Col>
+                )}
+            </Row>
+            </div>
         </Container>
     )
 }
