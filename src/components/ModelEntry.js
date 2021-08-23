@@ -1,12 +1,12 @@
 import {Card, Col, Form, Row} from "react-bootstrap"
 
-function ModelEntry({name, params}) {
+function ModelEntry({name, params, key}) {
 
 
     return (
             <Card style={{ width: '25rem', flex: 1}}>
             <Card.Body>
-                <Card.Title>{name}</Card.Title>
+                <Card.Title>{name} {key}</Card.Title>
                 <Card.Text>
                 <Row>
 
